@@ -10,11 +10,11 @@ class Human {
      public function doAttack($enemy) {
           echo "[".$this->name."]の攻撃!\n";
           echo "[".$enemy->name."]に".$this->attackPoint."のダメージ!";
-          $enemy->tookDamege($this->attackPoint);
+          $enemy->tookDamage($this->attackPoint);
      }
 
      public function tookDamage($damage) {
-          $this->point -= $damage;
+          $this->hitPoint -= $damage;
 
           if($this->hitPoint < 0) {
                $this->hitPoint = 0;
