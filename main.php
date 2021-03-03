@@ -2,35 +2,36 @@
 
 require_once('./classes/Human.php');
 require_once('./classes/Enemy.php');
+require_once('./classes/Brave.php');
 
-$brave = new Human;
+$sawada = new Brave;
 $goblin = new Enemy;
 
-$brave->name = "勇者";
+$sawada->name = "勇者";
 $goblin->name = "ゴブリン";
 $turn = 1;
 
-echo $brave->name .":".$brave->hitPoint."/".$brave::MAX_HITPOINT."\n";
+echo $sawada->name .":".$sawada->hitPoint."/".$sawada::MAX_HITPOINT."\n";
 echo $goblin->name .":".$goblin->hitPoint."/".$goblin::MAX_HITPOINT."\n";
 
-while($brave->hitPoint > 0 && $goblin->hitPoint > 0){
+while($sawada->hitPoint > 0 && $goblin->hitPoint > 0){
 
 
 echo "**".$turn."ターン目**\n";
 // ステータス
-echo $brave->name .":".$brave->hitPoint."/".$brave::MAX_HITPOINT."\n";
+echo $sawada->name .":".$sawada->hitPoint."/".$sawada::MAX_HITPOINT."\n";
 echo $goblin->name .":".$goblin->hitPoint."/".$goblin::MAX_HITPOINT."\n";
 
 // 攻撃
-$brave->doAttack($goblin);
+$sawada->doAttack($goblin);
 echo "\n";
-$goblin->doAttack($brave);
+$goblin->doAttack($sawada);
 echo "\n";
 
 $turn++;
 }
 
 echo "★★★ 戦闘終了 ★★★\n\n";
-echo $brave->name . "　：　" . $brave->hitPoint . "/" . $brave::MAX_HITPOINT . "\n";
+echo $sawada->name . "　：　" . $sawada->hitPoint . "/" . $sawada::MAX_HITPOINT . "\n";
 echo $goblin->name . "　：　" . $goblin->hitPoint . "/" . $goblin::MAX_HITPOINT . "\n\n";
 ?>
