@@ -2,12 +2,13 @@
 
 class Human
 {
+    // プロパティ
+    const MAX_HITPOINT = 100; // 最大HPの定義 定数
+    private $name; // 人間の名前
+    private $hitPoint = 100; // 現在のHP
+    private $attackPoint = 20; // 攻撃力
 
-    const MAX_HITPOINT = 100;
-    private $name;
-    private $hitPoint = 100;
-    private $attackPoint = 20;
-
+    // メソッド
     public function __construct($name, $hitPoint = 100, $attackPoint = 20)
     {
         $this->name = $name;
@@ -15,17 +16,29 @@ class Human
         $this->attackPoint = $attackPoint;
     }
 
-    public function doAttack($enemy)
+    // public function doAttack($enemy)
+    public function doAttack($enemies) // ここを編集
     {
-        echo "[" . $this->getName() . "]の攻撃!\n";
-        echo "[" . $enemy->getName() . "]に" . $this->attackPoint . "のダメージ!";
+        //========== ここから追加する ==========
+        // チェック１：自身のHPが0かどうか
+        if ($this->hitPoint <= 0) {
+            return false;
+        }
+
+
+        $enemyIndex = rand(0, count($enemies) - 1); // 添字は0から始まるので、-1する
+        $enemy = $enemies[$enemyIndex];
+        //========== ここまで追加する ==========
+
+        echo "『" .$this->name . "』の攻撃！\n";
+        echo "【" . $enemy->getName() . "】に " . $this->attackPoint . " のダメージ！\n";
         $enemy->tookDamage($this->attackPoint);
     }
 
     public function tookDamage($damage)
     {
         $this->hitPoint -= $damage;
-
+        // HPが0未満にならないための処理
         if ($this->hitPoint < 0) {
             $this->hitPoint = 0;
         }
@@ -34,6 +47,7 @@ class Human
     public function recoveryDamage($heal, $target)
     {
         $this->hitPoint += $heal;
+        // 最大値を超えて回復しない
         if ($this->hitPoint > $target::MAX_HITPOINT) {
             $this->hitPoint = $target::MAX_HITPOINT;
         }
@@ -54,3 +68,5 @@ class Human
         return $this->attackPoint;
     }
 }
+
+?>
