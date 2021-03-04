@@ -9,7 +9,7 @@ class Lives
 
     public function __construct(
         $name,
-        $hitpoint = 50,
+        $hitPoint = 50,
         $attackPoint = 10,
         $intelligence = 0
     ) {
